@@ -3,7 +3,7 @@ package Unit.Сlose_combat;
 import java.util.ArrayList;
 
 
-import Unit.man;
+import Unit.Human;
 
 
 public class Farmer<man> extends Character {
@@ -18,18 +18,20 @@ public class Farmer<man> extends Character {
         super.name= name;
 }
 
-    
+
+
     @Override
     public String getInfo() {
         return String.format("Имя: %s  Hp: %d Урон: %d Защита: %d %2d Скорость %2d Фермер",
         this.name, this.hp,this.maxHp,this.minAttack,maxAttack, this.def, this.speed,this.getClass().getSimpleName());
         }
     @Override
-    public void step(ArrayList<Unit.man> t1, ArrayList<Unit.man> t2) {
+    public void step(ArrayList<Human> t1, ArrayList<Human> t2) {
         if (state.equals("Die")) {hp = 0; return;}
         if (!state.equals("Die")) state = "Stand";
         System.out.println("Фермер " + name + " освободился");
     }
+    
 }    
 
 

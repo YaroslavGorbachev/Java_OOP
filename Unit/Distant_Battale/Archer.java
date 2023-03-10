@@ -1,12 +1,15 @@
 package Unit.Distant_Battale;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+import java.sql.SQLOutput;
 
-import Unit.Vector2D;
-import Unit.man;
-import Unit.Сlose_combat.Farmer;
 
-public abstract class Archer extends man{
+
+import Unit.Human;
+
+
+public abstract class Archer extends Human {
     int shoots;
 
     public Archer (int hp, int maxHp, int minAttack, int maxAttack,int def,int speed,int shoots,String name,int x,int y){
@@ -14,10 +17,10 @@ public abstract class Archer extends man{
 
     this.shoots = shoots;
 
-    
-}
+
+    }
     @Override
-    public void step(ArrayList<man> t1, ArrayList<man> t2) {
+    public void step(ArrayList<Human> t1, ArrayList<Human> t2) {
         if (state.equals("Die")) {hp = 0; return;}
         if (state.equals("DIe") || shoots == 0) return;
         int target = findNearest(t2);
@@ -36,66 +39,17 @@ public abstract class Archer extends man{
         }
         shoots --;
     }
-
-//@Override
-//public void step(ArrayList<man> t1, ArrayList<man> t2) {
-//    if (this.hp >= 0 || this.shoot == 0) {
-//        Random rnd = new Random();
-//        if (t1.contains(this)) {
-//            int min = 20;
-//            int tmp;
-//            int index = 0;
-//            for (int i = 0; i < t2.size(); i++) {
-//                tmp = Vector2D.getDistance(this, (man) t2.get(i));
-//                if (min > tmp) {
-//                    min = tmp;
-//                    index = i;
-//                }
-//            }
-//            System.out.println(this.toString());
-//            System.out.println(t2.get(index));
-//            System.out.printf("%s стреляет в %s\n", this.name, t2.get(index).getName());
-//            t2.get(index).hp = t2.get(index).hp - rnd.nextInt(this.minAttack, this.maxAttack);
-//            if (searchFermer(t1)) this.shoot--;
-//            System.out.println(this.toString());
-//            System.out.println(t2.get(index));
-//
-//
-//
-//        } else {
-//            int min = 0;
-//            int tmp;
-//            int index = 0;
-//            for (int i = 0; i < t1.size(); i++) {
-//                tmp = Vector2D.getDistance(this, (man) t1.get(i));
-//                if (min > tmp) {
-//                    min = tmp;
-//                    index = i;
-//                }
-//            }
-//            System.out.println(t1.get(index));
-//            System.out.printf("%s стреляет в %s\n", this.name, t2.get(index).getName());
-//            System.out.println(this.toString());
-//            t1.get(index).hp = t1.get(index).hp - rnd.nextInt(this.minAttack, this.maxAttack);
-//            if (searchFermer(t2)) this.shoot--;
-//            System.out.println(this.toString());
-//            System.out.println(t1.get(index));
-//
-//
-//        }
-//    }
-//}
-//boolean searchFermer(ArrayList<man> team){
-//    boolean search = true;
-//
-//    for (int i = 0; i < team.size(); i++) {
-//        if (team.get(i) instanceof Farmer){
-//            search = false;
-//        }
-//    }
-//    return search;
-//}
+    @Override
+    public String toString() {
+        return "🏹" +
+                " H:" + Math.round(hp) +
+                " D:" + def +
+                " A:" + attack +
+                " Dmg:" + Math.round(Math.abs((minAttack+maxAttack)/2)) + " " +
+                state;
+    }
 }
+
 
 
     

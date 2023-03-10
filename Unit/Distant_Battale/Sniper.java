@@ -1,8 +1,8 @@
 package Unit.Distant_Battale;
 
 import java.util.ArrayList;
-import java.util.List;
-import Unit.man;
+
+import Unit.Human;
 
 public class Sniper extends Archer {
 
@@ -19,8 +19,9 @@ public class Sniper extends Archer {
     }
 
 
+
     @Override
-    public void step(ArrayList<man> t1, ArrayList<man> t2) {
+    public void step(ArrayList<Human> t1, ArrayList<Human> t2) {
         super.step(t1, t2);
     }
 }

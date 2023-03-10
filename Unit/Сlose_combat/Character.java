@@ -1,15 +1,16 @@
 package Unit.Сlose_combat;
-import Unit.man;
+import Unit.Human;
 
 import java.util.ArrayList;
 
 
-public abstract class Character extends man{
+public abstract class Character extends Human {
     
     int cartridges;
     int stealth;
     String name;
-    
+
+
     public Character (int hp, int maxHp, int minAttack, int maxAttack,int def,int speed,int x,int y) {
     super(hp,maxHp,minAttack,maxAttack,def,speed,x,y);
     }      
@@ -21,7 +22,7 @@ public abstract class Character extends man{
         return stealth;
     }
     @Override
-    public void step(ArrayList<man> t1, ArrayList<man> t2) {
+    public void step(ArrayList<Human> t1, ArrayList<Human> t2) {
 
     }
 }
