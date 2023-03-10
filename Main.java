@@ -9,6 +9,7 @@ import Unit.Сlose_combat.Farmer;
 import Unit.Сlose_combat.Outlaw;
 import Unit.Сlose_combat.Spearman;
 
+import javax.sound.midi.Soundbank;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Random;
@@ -17,88 +18,87 @@ import java.util.Scanner;
 
 public class Main {
     static final int UNITS = 10;
-    public static ArrayList<man> team1 = new ArrayList<>();
-    public static ArrayList<man> team2 = new ArrayList<>();
-    public static ArrayList<man> allTeam = new ArrayList<>();
+    public static ArrayList<Human> team1 = new ArrayList<>();
+    public static ArrayList<Human> team2 = new ArrayList<>();
+    public static ArrayList<Human> allTeam = new ArrayList<>();
     static int dieTeam1 = 0;
     static int dieTeam2 = 0;
 
-    Scanner user_input = new Scanner(System.in);
-        System.out.print"Press Enter to begin.");
-        user_input.nextLine();
-
-    createTeam(team1, 0,1);
-    createTeam(team2, 3,10);
-    allTeam.addAll(team1);
-    allTeam.addAll(team2);
-    sortedTeam(allTeam);
-      while (true){
-        user_input.nextLine();
-        for (man human: allTeam) {
-            if ( team1.contains(human)) human.step(team1, team2);
-            else human.step(team2, team1);
-        }
-        for (man human: team1) {
-            if (human.getState() == "Die") dieTeam1++;
-        }
-        if (dieTeam2 == 10){
-            System.out.println("******************************************Green winner!******************************************");
-            break;
-        } else dieTeam1 = 0;
-        for (man human: team2) {
-            if (man.getState() == "Die") dieTeam2++;
-        }
-        if (dieTeam2 == 10){
-            System.out.println("******************************************Blue winner!******************************************");
-            break;
-        } else dieTeam2 = 0;
-    }
-
-
     public static void main(String[] args) {
+        Scanner user_input = new Scanner(System.in);
+        System.out.print("Press Enter to begin.");
+        user_input.nextLine();
+        createTeam(team1, 0, 1);
+        createTeam(team2, 3, 10);
+        allTeam.addAll(team1);
+        allTeam.addAll(team2);
+        sortedTeam(allTeam);
 
-        static void sortedTeam (ArrayList < man > team) {
-            team.sort(new Comparator<man>() {
+        while (true) {
+            user_input.nextLine();
+            View.view();
+            for (Human human : allTeam) {
+                if (team1.contains(human)) human.step(team1, team2);
+                else human.step(team2, team1);
+            }
+            for (Human human : team1) {
+                if (human.getState() == "Die") dieTeam1++;
+            }
+            if (dieTeam2 == 10) {
+                System.out.println("******************************************Red winner!******************************************");
+                break;
+            } else dieTeam1 = 0;
+            for (Human human : team2) {
+                if (Human.getState() == "Die") dieTeam2++;
+            }
+            if (dieTeam2 == 10) {
+                System.out.println("******************************************Blue winner!******************************************");
+                break;
+            } else dieTeam2 = 0;
+        }
+
+        static void sortedTeam (ArrayList< Human > team){
+            team.sort(new Comparator<Human>() {
                 @Override
-                public int compare(man o1, man o2) {
+                public int compare(Human o1, Human o2) {
                     if (o2.getSpeed() == o1.getSpeed()) {
                         return o1.getHp() - o2.getHp();
                     }
                     return o2.getSpeed() - o1.getSpeed();
                 }
             });
-        }
+            }
 
         static void createTeam (ArrayList team,int offset, int posY){
-            for (int i = 1; i <= UNITS; i++) {
-                int rnd = new Random().nextInt(4) + offset;
-                switch (rnd) {
-                    case (0):
-                        team.add(new Sniper(man.getName(), i, posY));
-                        break;
-                    case (1):
-                        team.add(new Outlaw(man.getName(), i, posY));
-                        break;
-                    case (2):
-                        team.add(new Mag(man.getName(), i, posY));
-                        break;
-                    case (3):
-                        team.add(new Farmer<>(man.getName(), i, posY));
-                        break;
-                    case (4):
-                        team.add(new Crossbowman(man.getName(), i, posY));
-                        break;
-                    case (5):
-                        team.add(new Monk(man.getName(), i, posY));
-                        break;
-                    case (6):
-                        team.add(new Spearman(man.getName(), i, posY));
-                        break;
+                for (int i = 1; i <= UNITS; i++) {
+                    int rnd = new Random().nextInt(4) + offset;
+                    switch (rnd) {
+                        case (0):
+                            team.add(new Sniper(Human.getName(), i, posY));
+                            break;
+                        case (1):
+                            team.add(new Outlaw(Human.getName(), i, posY));
+                            break;
+                        case (2):
+                            team.add(new Mag(Human.getName(), i, posY));
+                            break;
+                        case (3):
+                            team.add(new Farmer<>(Human.getName(), i, posY));
+                            break;
+                        case (4):
+                            team.add(new Crossbowman(Human.getName(), i, posY));
+                            break;
+                        case (5):
+                            team.add(new Monk(Human.getName(), i, posY));
+                            break;
+                        case (6):
+                            team.add(new Spearman(Human.getName(), i, posY));
+                            break;
+                    }
                 }
             }
         }
     }
-
 
 
 
